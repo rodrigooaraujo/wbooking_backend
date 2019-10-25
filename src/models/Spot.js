@@ -11,13 +11,14 @@ const SpotScheme = new mongoose.Schema({
         ref: 'User'//Module
     }
 }, {
+        timestamps: true,
         toJSON: {
             virtuals: true,
         } // when requestig a virtual it should convert to JSON
     });
 
 SpotScheme.virtual('thumbnail_url').get(function () {
-    return `http://localhost:3333/files/${this.thumbnail}`
+    return `/files/${this.thumbnail}`
 });
 
 module.exports = mongoose.model('Spot', SpotScheme);

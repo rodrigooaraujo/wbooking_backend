@@ -6,8 +6,25 @@ module.exports = {
 
     async index(req, res) {
         const { tech } = req.query;
-        const spots = await Spot.find({ techs: tech });
-        return res.json(spots);
+        let spots = await Spot.find({ techs: tech });
+
+        var ordered = spots.sort((a, b) => {
+
+            const valA = new Date(a.createdAt).getTime();
+            const valB = new Date(b.createdAt).getTime();
+
+            if (valA > valB) {
+                return -1;
+            }
+            if (valA < valB) {
+                return 1;
+            }
+
+            return 0;
+
+        })
+
+        return res.json(ordered);
     },
     async store(req, res) {
 
