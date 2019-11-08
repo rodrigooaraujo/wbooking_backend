@@ -18,7 +18,7 @@ const SpotScheme = new mongoose.Schema({
     });
 
 SpotScheme.virtual('thumbnail_url').get(function () {
-    return `/files/${this.thumbnail}`
+    return `http://localhost:3333/files/${this.thumbnail}`
 });
 
 module.exports = mongoose.model('Spot', SpotScheme);
